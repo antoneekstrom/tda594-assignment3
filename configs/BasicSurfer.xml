@@ -5,8 +5,8 @@
 	<feature automatic="selected" name="Movement"/>
 	<feature automatic="unselected" name="RandomMovement"/>
 	<feature manual="selected" name="WaveSurfing"/>
-	<feature automatic="selected" name="Targeting"/>
-	<feature manual="selected" name="GuessFactorTargeting"/>
+	<feature name="Targeting"/>
+	<feature name="GuessFactorTargeting"/>
 	<feature automatic="selected" name="EnemyWave"/>
-	<feature automatic="selected" name="GFTWave"/>
+	<feature name="GFTWave"/>
 </configuration>

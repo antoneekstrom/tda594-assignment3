@@ -1,4 +1,4 @@
-package features;
+package spl.robot;
 import java.awt.geom.Point2D;
 
 public class EnemyWave {

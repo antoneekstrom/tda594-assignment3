@@ -26,4 +26,18 @@
 			</and>
 		</and>
 	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>GuessFactorTargeting</var>
+				<var>GFTWave</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>WaveSurfing</var>
+				<var>EnemyWave</var>
+			</imp>
+		</rule>
+	</constraints>
 </featureModel>

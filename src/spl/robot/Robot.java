@@ -5,11 +5,6 @@ import robocode.util.Utils;
 import java.awt.geom.*;     // for Point2D's
 import java.lang.*;         // for Double and Integer objects
 import java.util.ArrayList; // for collection of waves
-
-import features.EnemyWave;
-import features.GFTUtils;
-import features.GFTWave;
-
 import java.awt.Color;
 
 public class Robot extends AdvancedRobot {
@@ -25,6 +20,8 @@ public class Robot extends AdvancedRobot {
 	
 	private static double lateralDirection;
 	private static double lastEnemyVelocity;
+	
+	private static GFTMovement movement;
 
     // We must keep track of the enemy's energy level to detect EnergyDrop,
     // indicating a bullet is fired
@@ -39,6 +36,10 @@ public class Robot extends AdvancedRobot {
         = new java.awt.geom.Rectangle2D.Double(18, 18, 764, 564);
     public static double WALL_STICK = 160;
 
+	public Robot() {
+		movement = new GFTMovement(this);	
+	}
+    
     public void run() {
 		setColors(Color.BLUE, Color.BLACK, Color.YELLOW);
 		lateralDirection = 1;
@@ -58,6 +59,7 @@ public class Robot extends AdvancedRobot {
     }
 
     public void onScannedRobot(ScannedRobotEvent e) {
+    	// #if WaveSurfing
         _myLocation = new Point2D.Double(getX(), getY());
 
         double lateralVelocity = getVelocity()*Math.sin(e.getBearingRadians());
@@ -92,7 +94,12 @@ public class Robot extends AdvancedRobot {
 
         updateWaves();
         doSurfing();
+        // #endif
         
+    	// #if RandomMovement
+//@    	movement.onScannedRobot(e);
+    	// #endif
+    	
         // #if GuessFactorTargeting
 		double enemyAbsoluteBearing = getHeadingRadians() + e.getBearingRadians();
 		double enemyDistance = e.getDistance();
