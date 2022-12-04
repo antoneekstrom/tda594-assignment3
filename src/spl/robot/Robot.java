@@ -60,67 +60,67 @@ public class Robot extends AdvancedRobot {
 
     public void onScannedRobot(ScannedRobotEvent e) {
     	// #if WaveSurfing
-        _myLocation = new Point2D.Double(getX(), getY());
-
-        double lateralVelocity = getVelocity()*Math.sin(e.getBearingRadians());
-        double absBearing = e.getBearingRadians() + getHeadingRadians();
-
-        setTurnRadarRightRadians(Utils.normalRelativeAngle(absBearing - getRadarHeadingRadians()) * 2);
-
-        _surfDirections.add(0,
-            new Integer((lateralVelocity >= 0) ? 1 : -1));
-        _surfAbsBearings.add(0, new Double(absBearing + Math.PI));
-
-
-        double bulletPower = _oppEnergy - e.getEnergy();
-        if (bulletPower < 3.01 && bulletPower > 0.09
-            && _surfDirections.size() > 2) {
-            EnemyWave ew = new EnemyWave();
-            ew.fireTime = getTime() - 1;
-            ew.bulletVelocity = bulletVelocity(bulletPower);
-            ew.distanceTraveled = bulletVelocity(bulletPower);
-            ew.direction = ((Integer)_surfDirections.get(2)).intValue();
-            ew.directAngle = ((Double)_surfAbsBearings.get(2)).doubleValue();
-            ew.fireLocation = (Point2D.Double)_enemyLocation.clone(); // last tick
-
-            _enemyWaves.add(ew);
-        }
-
-        _oppEnergy = e.getEnergy();
-
-        // update after EnemyWave detection, because that needs the previous
-        // enemy location as the source of the wave
-        _enemyLocation = project(_myLocation, absBearing, e.getDistance());
-
-        updateWaves();
-        doSurfing();
+//@        _myLocation = new Point2D.Double(getX(), getY());
+//@
+//@        double lateralVelocity = getVelocity()*Math.sin(e.getBearingRadians());
+//@        double absBearing = e.getBearingRadians() + getHeadingRadians();
+//@
+//@        setTurnRadarRightRadians(Utils.normalRelativeAngle(absBearing - getRadarHeadingRadians()) * 2);
+//@
+//@        _surfDirections.add(0,
+//@            new Integer((lateralVelocity >= 0) ? 1 : -1));
+//@        _surfAbsBearings.add(0, new Double(absBearing + Math.PI));
+//@
+//@
+//@        double bulletPower = _oppEnergy - e.getEnergy();
+//@        if (bulletPower < 3.01 && bulletPower > 0.09
+//@            && _surfDirections.size() > 2) {
+//@            EnemyWave ew = new EnemyWave();
+//@            ew.fireTime = getTime() - 1;
+//@            ew.bulletVelocity = bulletVelocity(bulletPower);
+//@            ew.distanceTraveled = bulletVelocity(bulletPower);
+//@            ew.direction = ((Integer)_surfDirections.get(2)).intValue();
+//@            ew.directAngle = ((Double)_surfAbsBearings.get(2)).doubleValue();
+//@            ew.fireLocation = (Point2D.Double)_enemyLocation.clone(); // last tick
+//@
+//@            _enemyWaves.add(ew);
+//@        }
+//@
+//@        _oppEnergy = e.getEnergy();
+//@
+//@        // update after EnemyWave detection, because that needs the previous
+//@        // enemy location as the source of the wave
+//@        _enemyLocation = project(_myLocation, absBearing, e.getDistance());
+//@
+//@        updateWaves();
+//@        doSurfing();
         // #endif
         
     	// #if RandomMovement
-//@    	movement.onScannedRobot(e);
+    	movement.onScannedRobot(e);
     	// #endif
     	
         // #if GuessFactorTargeting
-		double enemyAbsoluteBearing = getHeadingRadians() + e.getBearingRadians();
-		double enemyDistance = e.getDistance();
-		double enemyVelocity = e.getVelocity();
-		if (enemyVelocity != 0) {
-			lateralDirection = GFTUtils.sign(enemyVelocity * Math.sin(e.getHeadingRadians() - enemyAbsoluteBearing));
-		}
-		GFTWave wave = new GFTWave(this);
-		wave.gunLocation = new Point2D.Double(getX(), getY());
-		GFTWave.targetLocation = GFTUtils.project(wave.gunLocation, enemyAbsoluteBearing, enemyDistance);
-		wave.lateralDirection = lateralDirection;
-		wave.bulletPower = BULLET_POWER;
-		wave.setSegmentations(enemyDistance, enemyVelocity, lastEnemyVelocity);
-		lastEnemyVelocity = enemyVelocity;
-		wave.bearing = enemyAbsoluteBearing;
-		setTurnGunRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getGunHeadingRadians() + wave.mostVisitedBearingOffset()));
-		setFire(wave.bulletPower);
-		if (getEnergy() >= BULLET_POWER) {
-			addCustomEvent(wave);
-		}
-		setTurnRadarRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getRadarHeadingRadians()) * 2);
+//@		double enemyAbsoluteBearing = getHeadingRadians() + e.getBearingRadians();
+//@		double enemyDistance = e.getDistance();
+//@		double enemyVelocity = e.getVelocity();
+//@		if (enemyVelocity != 0) {
+//@			lateralDirection = GFTUtils.sign(enemyVelocity * Math.sin(e.getHeadingRadians() - enemyAbsoluteBearing));
+//@		}
+//@		GFTWave wave = new GFTWave(this);
+//@		wave.gunLocation = new Point2D.Double(getX(), getY());
+//@		GFTWave.targetLocation = GFTUtils.project(wave.gunLocation, enemyAbsoluteBearing, enemyDistance);
+//@		wave.lateralDirection = lateralDirection;
+//@		wave.bulletPower = BULLET_POWER;
+//@		wave.setSegmentations(enemyDistance, enemyVelocity, lastEnemyVelocity);
+//@		lastEnemyVelocity = enemyVelocity;
+//@		wave.bearing = enemyAbsoluteBearing;
+//@		setTurnGunRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getGunHeadingRadians() + wave.mostVisitedBearingOffset()));
+//@		setFire(wave.bulletPower);
+//@		if (getEnergy() >= BULLET_POWER) {
+//@			addCustomEvent(wave);
+//@		}
+//@		setTurnRadarRightRadians(Utils.normalRelativeAngle(enemyAbsoluteBearing - getRadarHeadingRadians()) * 2);
 		// #endif
     }
 

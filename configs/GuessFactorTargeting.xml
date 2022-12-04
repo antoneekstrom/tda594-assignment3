@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature automatic="selected" name="assignment3"/>
+	<feature automatic="selected" name="Robot"/>
+	<feature name="Movement"/>
+	<feature name="RandomMovement"/>
+	<feature name="WaveSurfing"/>
+	<feature automatic="selected" name="Targeting"/>
+	<feature manual="selected" name="GuessFactorTargeting"/>
+	<feature name="EnemyWave"/>
+	<feature automatic="selected" name="GFTWave"/>
+</configuration>
